@@ -1,0 +1,39 @@
+<section class="relative min-h-screen flex items-center justify-center bg-base-100 animate-fade-in-up delay-200">
+  <div class="absolute inset-0 bg-gradient-to-br from-primary/10 via-secondary/5 to-accent/10"></div>
+
+  <div class="max-w-5xl mx-auto text-center space-y-8">
+    <h1 class="text-5xl md:text-7xl font-bold ">
+      <span>{{ displayedText() }}</span>
+      <span class="animate-blink">|</span>
+    </h1>
+
+    <p class="text-xl md:text-2xl text-base-content/70 max-w-3xl mx-auto">
+      Le Kanban nouvelle génération qui booste la productivité de votre équipe.
+      Collaboratif, intelligent, et tellement simple.
+    </p>
+
+    <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+      <button class="btn btn-primary btn-lg" aria-label="Commencer gratuitement avec FlowBoard">
+        Commencer gratuitement
+      </button>
+
+      <button (click)="scrollToSection('demo')" class="btn btn-outline btn-lg" aria-label="Voir la démonstration interactive">
+        Voir la démo
+      </button>
+    </div>
+
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8 pt-12">
+      @for (stat of stats; track stat.label) {
+        <article
+          class="relative p-6 rounded-2xl bg-base-100 backdrop-blur-lg border border-base-300">
+          <p
+            class="text-4xl md:text-5xl font-bold bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
+            {{ stat.value }}
+          </p>
+          <p class="text-sm text-base-content/60 mt-2">{{ stat.label }}</p>
+        </article>
+      }
+    </div>
+  </div>
+</section>

@@ -1,0 +1,39 @@
+<div [class.reduce-motion]="reducedMotion()" class="landing-page">
+  <nav class="fixed top-0 left-0 right-0 z-50 bg-base-100 border-b border-base-300 shadow-sm" role="navigation" aria-label="Navigation principale">
+    <div class="container mx-auto px-6 py-4">
+      <div class="flex items-center justify-between">
+        <a class="flex items-center gap-3 group" href="#" aria-label="FlowBoard - Retour à l'accueil">
+          <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-primary to-secondary flex items-center justify-center text-2xl shadow" aria-hidden="true">
+            📋
+          </div>
+          <span class="text-2xl font-bold bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
+                        FlowBoard
+                    </span>
+        </a>
+
+        <div class="hidden md:flex items-center gap-8" role="menubar">
+          <a class="text-sm font-medium hover:text-primary transition-colors" href="#features" role="menuitem">Fonctionnalités</a>
+          <a class="text-sm font-medium hover:text-primary transition-colors" href="#demo" role="menuitem">Démo</a>
+          <a class="text-sm font-medium hover:text-primary transition-colors" href="#pricing" role="menuitem">Tarifs</a>
+          <a class="text-sm font-medium hover:text-primary transition-colors" href="#faq" role="menuitem">FAQ</a>
+        </div>
+
+        <div class="flex items-center gap-4">
+          <button class="btn btn-ghost btn-sm" aria-label="Se connecter à votre compte">Se connecter</button>
+          <button class="btn btn-primary btn-sm" aria-label="Commencer gratuitement avec FlowBoard">Commencer</button>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <main class="pt-16">
+    <app-hero />
+    <app-features />
+    <app-testimonials />
+    <app-pricing />
+    <app-faq />
+    <app-cta />
+  </main>
+
+  <app-footer />
+</div>
