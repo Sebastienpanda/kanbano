@@ -1,14 +1,16 @@
-import { Component, signal } from '@angular/core';
+import { Component, signal, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Testimonial } from '../types/landing-page.types';
+import { Skeleton } from '../../shared/skeleton/skeleton';
 
 @Component({
     selector: 'app-testimonials',
     standalone: true,
-    imports: [CommonModule],
+    imports: [CommonModule, Skeleton],
     templateUrl: './testimonials.component.html',
 })
-export class TestimonialsComponent {
+export class TestimonialsComponent implements OnInit {
+    protected isLoading = signal(true);
     protected testimonials = signal<Testimonial[]>([
         {
             name: 'Sarah Dubois',
@@ -47,4 +49,15 @@ export class TestimonialsComponent {
             rating: 5,
         },
     ]);
+
+    ngOnInit() {
+        // Simulate loading data
+        setTimeout(() => {
+            this.isLoading.set(false);
+        }, 1500);
+    }
+
+    getSkeletonItems(): number[] {
+        return [1, 2, 3, 4];
+    }
 }

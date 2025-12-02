@@ -1,9 +1,9 @@
 <div [class.reduce-motion]="reducedMotion()" class="landing-page">
-  <nav class="fixed top-0 left-0 right-0 z-50 bg-base-100 border-b border-base-300 shadow-sm" role="navigation" aria-label="Navigation principale">
+  <nav class="fixed top-0 left-0 right-0 z-50 backdrop-blur-lg bg-base-100/80 border-b border-base-300/50 shadow-sm" role="navigation" aria-label="Navigation principale">
     <div class="container mx-auto px-6 py-4">
       <div class="flex items-center justify-between">
-        <a class="flex items-center gap-3 group" href="#" aria-label="FlowBoard - Retour à l'accueil">
-          <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-primary to-secondary flex items-center justify-center text-2xl shadow" aria-hidden="true">
+        <a class="flex items-center gap-3 group hover:scale-105 transition-transform duration-300" href="#" aria-label="FlowBoard - Retour à l'accueil">
+          <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-primary to-secondary flex items-center justify-center text-2xl shadow-lg group-hover:shadow-primary/30 transition-shadow" role="img" aria-label="Logo FlowBoard">
             📋
           </div>
           <span class="text-2xl font-bold bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
@@ -12,15 +12,43 @@
         </a>
 
         <div class="hidden md:flex items-center gap-8" role="menubar">
-          <a class="text-sm font-medium hover:text-primary transition-colors" href="#features" role="menuitem">Fonctionnalités</a>
-          <a class="text-sm font-medium hover:text-primary transition-colors" href="#demo" role="menuitem">Démo</a>
-          <a class="text-sm font-medium hover:text-primary transition-colors" href="#pricing" role="menuitem">Tarifs</a>
-          <a class="text-sm font-medium hover:text-primary transition-colors" href="#faq" role="menuitem">FAQ</a>
+          <a class="text-sm font-medium hover:text-primary transition-colors relative group" href="#features" role="menuitem">
+            Fonctionnalités
+            <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary group-hover:w-full transition-all duration-300"></span>
+          </a>
+          <a class="text-sm font-medium hover:text-primary transition-colors relative group" href="#demo" role="menuitem">
+            Démo
+            <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary group-hover:w-full transition-all duration-300"></span>
+          </a>
+          <a class="text-sm font-medium hover:text-primary transition-colors relative group" href="#pricing" role="menuitem">
+            Tarifs
+            <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary group-hover:w-full transition-all duration-300"></span>
+          </a>
+          <a class="text-sm font-medium hover:text-primary transition-colors relative group" href="#faq" role="menuitem">
+            FAQ
+            <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary group-hover:w-full transition-all duration-300"></span>
+          </a>
         </div>
 
-        <div class="flex items-center gap-4">
+        <div class="flex items-center gap-3">
+          <!-- Theme Toggle -->
+          <button
+            class="btn btn-ghost btn-sm btn-circle hover:bg-base-200/50 group"
+            (click)="theme.toggle()"
+            [attr.aria-label]="theme.isDark() ? 'Passer en mode clair' : 'Passer en mode sombre'">
+            @if (theme.isDark()) {
+              <svg class="w-5 h-5 group-hover:rotate-12 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" />
+              </svg>
+            } @else {
+              <svg class="w-5 h-5 group-hover:-rotate-12 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" />
+              </svg>
+            }
+          </button>
+
           <button class="btn btn-ghost btn-sm" aria-label="Se connecter à votre compte">Se connecter</button>
-          <button class="btn btn-primary btn-sm" aria-label="Commencer gratuitement avec FlowBoard">Commencer</button>
+          <button class="btn btn-primary btn-sm shadow-lg shadow-primary/20 hover:shadow-primary/40 transition-shadow" aria-label="Commencer gratuitement avec FlowBoard">Commencer</button>
         </div>
       </div>
     </div>
@@ -28,7 +56,8 @@
 
   <main class="pt-16">
     <app-hero />
-    <app-features />
+<!--    <app-features />-->
+    <app-demo />
     <app-testimonials />
     <app-pricing />
     <app-faq />
@@ -36,4 +65,5 @@
   </main>
 
   <app-footer />
+  <app-toast-container />
 </div>

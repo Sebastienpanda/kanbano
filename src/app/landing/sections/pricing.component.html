@@ -38,14 +38,19 @@
     <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-7xl mx-auto">
       @for (plan of plans(); track plan.name; let i = $index) {
         <article
+          appCardTilt
+          [maxTilt]="plan.highlighted ? 12 : 8"
+          [scale]="plan.highlighted ? 1.08 : 1.05"
           [style.animation-delay]="(i * 150) + 'ms'"
-          class="animate-fade-in-up"
+          class="relative group"
         >
 
           @if (plan.badge) {
-            <div class="absolute -top-4 left-1/2 -translate-x-1/2 z-20">
-              <span
-                class="px-4 py-1.5 rounded-full bg-gradient-to-r from-primary to-secondary text-primary-content text-sm font-bold shadow-lg">
+            <div class="absolute -top-4 left-1/2 -translate-x-1/2 z-20 animate-bounce">
+              <span class="px-4 py-2 rounded-full bg-gradient-to-r from-primary to-secondary text-primary-content text-sm font-bold shadow-xl shadow-primary/50 flex items-center gap-2">
+                <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                  <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
+                </svg>
                 {{ plan.badge }}
               </span>
             </div>
@@ -54,39 +59,46 @@
 
           <div
             [class]="plan.highlighted
-                            ? 'bg-gradient-to-br from-base-100 to-primary/5 border-primary shadow-xl shadow-primary/20'
-                            : 'bg-base-100 border-base-300 hover:border-primary/30'"
-            class="relative h-full rounded-3xl border-2 transition duration-350 ease-in-out"
+                            ? 'card bg-gradient-to-br from-base-100 to-primary/5 border-primary shadow-2xl shadow-primary/20 scale-105'
+                            : 'card bg-base-100/50 backdrop-blur-sm border-base-300/50 hover:border-primary/30 shadow-lg hover:shadow-xl'"
+            class="h-full border-2 transition-all duration-300 relative overflow-hidden group-hover:scale-105"
           >
+            <!-- Shine effect -->
+            <div class="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000 ease-out"></div>
 
-            <div class="relative p-8 space-y-6">
+            <div class="card-body gap-6 relative z-10">
               <div class="space-y-2">
-                <h3 class="text-2xl font-bold">{{ plan.name }}</h3>
+                <h3 class="text-2xl font-bold group-hover:text-primary transition-colors">{{ plan.name }}</h3>
                 <p class="text-sm text-base-content/60">{{ plan.description }}</p>
               </div>
 
               <div class="py-4">
                 <div class="flex items-baseline gap-2">
-                                    <span
-                                      class="text-5xl font-bold bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
-                                        {{ getPrice(plan) }}€
-                                    </span>
+                  <span class="text-5xl font-bold bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
+                    {{ getPrice(plan) }}€
+                  </span>
                   @if (plan.price > 0) {
-                    <span class="text-base-content/50">
-                                            / {{ isAnnual() ? 'mois (facturé annuellement)' : 'mois' }}
-                                        </span>
+                    <span class="text-base-content/50 text-sm">
+                      / {{ isAnnual() ? 'mois (facturé annuellement)' : 'mois' }}
+                    </span>
                   }
                 </div>
 
                 @if (isAnnual() && getSavings(plan) > 0) {
-                  <div class="mt-2 text-sm text-success font-medium animate-fade-in">
-                    Vous économisez {{ (plan.price - plan.priceAnnual) * 12 }}€/an
+                  <div class="mt-2 inline-flex items-center gap-1 px-3 py-1 rounded-full bg-success/10 text-success text-sm font-medium animate-fade-in">
+                    <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                      <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                    </svg>
+                    Économisez {{ (plan.price - plan.priceAnnual) * 12 }}€/an
                   </div>
                 }
               </div>
 
 
-              <button class="btn btn-outline btn-primary" [attr.aria-label]="plan.cta + ' - Plan ' + plan.name"
+              <button
+                [class]="plan.highlighted ? 'btn btn-primary shadow-lg shadow-primary/30' : 'btn btn-outline btn-primary'"
+                class="w-full group/btn hover:scale-105 transition-all"
+                [attr.aria-label]="plan.cta + ' - Plan ' + plan.name"
               >
                 {{ plan.cta }}
                 <svg class="w-5 h-5 group-hover/btn:translate-x-1 transition-transform" fill="none"

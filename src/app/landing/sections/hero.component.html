@@ -1,10 +1,29 @@
-<section class="relative min-h-screen flex items-center justify-center bg-base-100 animate-fade-in-up delay-200">
+<section class="relative min-h-screen flex items-center justify-center bg-base-100 overflow-hidden">
+  <!-- Grid pattern background -->
+  <div class="absolute inset-0 bg-[linear-gradient(to_right,#8882_1px,transparent_1px),linear-gradient(to_bottom,#8882_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_110%)]"></div>
+
+  <!-- Gradient overlay -->
   <div class="absolute inset-0 bg-gradient-to-br from-primary/10 via-secondary/5 to-accent/10"></div>
 
-  <div class="max-w-5xl mx-auto text-center space-y-8">
-    <h1 class="text-5xl md:text-7xl font-bold ">
-      <span>{{ displayedText() }}</span>
-      <span class="animate-blink">|</span>
+  <!-- Floating orbs with parallax -->
+  <div class="absolute top-1/4 left-1/4 w-96 h-96 bg-primary/20 rounded-full blur-3xl animate-pulse will-change-transform" [style.transform]="getParallaxTransform(-0.1)"></div>
+  <div class="absolute bottom-1/4 right-1/4 w-96 h-96 bg-secondary/20 rounded-full blur-3xl animate-pulse will-change-transform" style="animation-delay: 2s;" [style.transform]="getParallaxTransform(-0.15)"></div>
+
+  <div class="relative z-10 max-w-5xl mx-auto text-center space-y-8 px-6 will-change-transform" [style.transform]="getParallaxTransform(0.05)" [style.opacity]="getParallaxOpacity()">
+    <!-- Badge animé with faster parallax -->
+    <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-base-200/80 backdrop-blur-sm border border-primary/20 shadow-lg will-change-transform" [style.transform]="getParallaxTransform(0.08)">
+      <span class="relative flex h-2 w-2">
+        <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-success opacity-75"></span>
+        <span class="relative inline-flex rounded-full h-2 w-2 bg-success"></span>
+      </span>
+      <span class="text-sm font-semibold">🎉 Nouveau : IA Collaborative disponible</span>
+    </div>
+
+    <h1 class="text-5xl md:text-7xl font-bold">
+      <span class="bg-gradient-to-r from-base-content via-primary to-base-content bg-clip-text text-transparent">
+        {{ displayedText() }}
+      </span>
+      <span class="animate-blink text-primary">|</span>
     </h1>
 
     <p class="text-xl md:text-2xl text-base-content/70 max-w-3xl mx-auto">
@@ -13,23 +32,30 @@
     </p>
 
     <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
-      <button class="btn btn-primary btn-lg" aria-label="Commencer gratuitement avec FlowBoard">
+      <button class="btn btn-primary btn-lg shadow-xl shadow-primary/30 hover:shadow-2xl hover:shadow-primary/40 hover:scale-105 transition-all duration-300 group" aria-label="Commencer gratuitement avec FlowBoard">
         Commencer gratuitement
+        <svg class="w-5 h-5 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path d="M13 7l5 5m0 0l-5 5m5-5H6" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+        </svg>
       </button>
 
-      <button (click)="scrollToSection('demo')" class="btn btn-outline btn-lg" aria-label="Voir la démonstration interactive">
+      <button (click)="scrollToSection('demo')" class="btn btn-outline btn-lg backdrop-blur-sm hover:bg-base-200/50 group" aria-label="Voir la démonstration interactive">
+        <svg class="w-5 h-5 group-hover:scale-110 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+          <path d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+        </svg>
         Voir la démo
       </button>
     </div>
 
 
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-8 pt-12">
+    <div class="stats-grid grid grid-cols-1 md:grid-cols-3 gap-8 pt-12 will-change-transform" [style.transform]="getParallaxTransform(0.03)">
       @for (stat of stats; track stat.label) {
         <article
-          class="relative p-6 rounded-2xl bg-base-100 backdrop-blur-lg border border-base-300">
+          class="relative p-6 rounded-2xl bg-base-100 backdrop-blur-lg border border-base-300 hover:scale-105 transition-transform duration-300">
           <p
-            class="text-4xl md:text-5xl font-bold bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
-            {{ stat.value }}
+            class="text-4xl md:text-5xl font-bold bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent tabular-nums">
+            {{ getDisplayValue(stat) }}
           </p>
           <p class="text-sm text-base-content/60 mt-2">{{ stat.label }}</p>
         </article>

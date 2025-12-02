@@ -1,11 +1,12 @@
 import { Component, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { PricingPlan } from '../types/landing-page.types';
+import { CardTilt } from '../../shared/directives/card-tilt';
 
 @Component({
     selector: 'app-pricing',
     standalone: true,
-    imports: [CommonModule],
+    imports: [CommonModule, CardTilt],
     templateUrl: './pricing.component.html',
 })
 export class PricingComponent {
