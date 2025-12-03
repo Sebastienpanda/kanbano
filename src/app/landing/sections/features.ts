@@ -1,31 +1,22 @@
-import { Component, signal } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
-import { Feature } from '../types/landing-page.types';
+import {ChangeDetectionStrategy, Component, inject, signal} from '@angular/core';
+import {CommonModule} from '@angular/common';
+import {DomSanitizer, SafeHtml} from '@angular/platform-browser';
+import {Feature} from '../types/landing-page.types';
 
 @Component({
     selector: 'app-features',
-    standalone: true,
     imports: [CommonModule],
-    templateUrl: './features.component.html',
+    templateUrl: './features.html',
+    changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class FeaturesComponent {
-    constructor(private sanitizer: DomSanitizer) {}
-
-    protected features = signal<Feature[]>([
+export class Features {
+    protected readonly features = signal<Feature[]>([
         {
             icon: 'rocket',
             iconType: 'svg',
             title: 'Démarrage Ultra-Rapide',
             description: 'Créez votre premier board en moins de 30 secondes. Interface intuitive, zéro courbe d\'apprentissage.',
             gradient: 'from-blue-500 to-cyan-500',
-        },
-        {
-            icon: 'ai',
-            iconType: 'svg',
-            title: 'IA Collaborative',
-            description: 'Notre IA suggère des priorités, détecte les blocages et optimise votre workflow automatiquement.',
-            gradient: 'from-purple-500 to-pink-500',
         },
         {
             icon: 'lightning',
@@ -55,23 +46,10 @@ export class FeaturesComponent {
             description: 'Dashboards interactifs, prédictions de délais, insights actionnables. Pilotez avec data.',
             gradient: 'from-yellow-500 to-orange-500',
         },
-        {
-            icon: 'link',
-            iconType: 'svg',
-            title: 'Intégrations Natives',
-            description: 'Slack, GitHub, Jira, Figma... Plus de 100 intégrations pour centraliser votre travail.',
-            gradient: 'from-pink-500 to-rose-500',
-        },
-        {
-            icon: 'globe',
-            iconType: 'svg',
-            title: 'Collaboration Globale',
-            description: 'Support multilingue, fuseaux horaires auto, @mentions, commentaires riches.',
-            gradient: 'from-teal-500 to-cyan-500',
-        },
     ]);
+    private readonly sanitizer = inject(DomSanitizer)
 
-    getIconSvg(iconName: string): SafeHtml {
+    protected getIconSvg(iconName: string): SafeHtml {
         const icons: Record<string, string> = {
             rocket: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z"></path><path d="m12 15-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z"></path><path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 0 5 0"></path><path d="M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5"></path></svg>',
             ai: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a2 2 0 0 1 2 2c0 .74-.4 1.39-1 1.73V7h1a7 7 0 0 1 7 7h1a1 1 0 0 1 1 1v3a1 1 0 0 1-1 1h-1v1a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-1H2a1 1 0 0 1-1-1v-3a1 1 0 0 1 1-1h1a7 7 0 0 1 7-7h1V5.73c-.6-.34-1-.99-1-1.73a2 2 0 0 1 2-2z"></path><path d="M14 16a2 2 0 1 1-4 0 2 2 0 0 1 4 0z"></path></svg>',
