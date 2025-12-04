@@ -37,24 +37,10 @@ module.exports = defineConfig([
                     style: "kebab-case",
                 },
             ],
-            "@typescript-eslint/prefer-readonly": "warn",
-            "@angular-eslint/prefer-signals": "warn",
-            "@angular-eslint/prefer-on-push-component-change-detection": [
-                "error"
-            ],
-            "@angular-eslint/prefer-output-readonly": [
-                "error"
-            ],
-            "@angular-eslint/use-injectable-provided-in": [
-                "error"
-            ],
-            "@typescript-eslint/no-inferrable-types": "off",
-            "@typescript-eslint/explicit-member-accessibility": ["warn", {
-                accessibility: "explicit",
-                overrides: {
-                    constructors: "no-public"
-                }
-            }],
+            "@typescript-eslint/consistent-type-definitions": [
+                "error",
+                "type"
+            ]
         },
     },
     {

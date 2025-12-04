@@ -1,0 +1,57 @@
+<section class="bg-gradient-to-br from-primary/5 via-transparent to-secondary/5 py-24">
+    <div class="container">
+        <div class="text-center max-w-3xl mx-auto mb-16 space-y-4">
+            <h2 class="text-4xl md:text-5xl font-bold">
+                Ils nous font
+                <span class="bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
+                    confiance
+                </span>
+            </h2>
+            <p class="text-lg text-base-content/70">
+                Plus de 50,000 équipes utilisent FlowBoard chaque jour
+            </p>
+        </div>
+
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+            @for (testimonial of testimonials(); track testimonial.name; let i = $index) {
+                <article
+                    [style.animation-delay]="(i * 150) + 'ms'"
+                    class="card bg-base-100 border border-base-300/50 shadow-lg"
+                >
+                    <div class="card-body">
+                        <div
+                            aria-hidden="true"
+                            class="absolute top-4 right-4 text-6xl text-primary">
+                            "
+                        </div>
+
+                        <div [attr.aria-label]="testimonial.rating + ' étoiles sur 5'" class="flex gap-1 mb-4"
+                             role="img">
+                            @for (star of [1, 2, 3, 4, 5]; track star) {
+                                <lucide-icon [class]="star <= testimonial.rating ?
+                                    'text-warning fill-warning' : 'text-base-300'" [img]="Star" size="20"/>
+                            }
+                        </div>
+
+                        <blockquote class="text-base-content/80 mb-6">
+                            {{ testimonial.content }}
+                        </blockquote>
+
+                        <footer
+                            class="flex items-center gap-4 pt-4 border-t border-base-300 group-hover:border-primary/20 transition-colors">
+                            <img [alt]="testimonial.name" [src]="testimonial.avatar"
+                                 class="size-12 rounded-full shadow-lg">
+                            <div>
+                                <cite
+                                    class="font-semibold text-base-content not-italic">{{ testimonial.name }}</cite>
+                                <p class="text-sm text-base-content/60">{{ testimonial.role }}</p>
+                                <p class="text-xs text-primary font-medium">{{ testimonial.company }}</p>
+                            </div>
+                        </footer>
+                    </div>
+                </article>
+            }
+        </div>
+    </div>
+</section>

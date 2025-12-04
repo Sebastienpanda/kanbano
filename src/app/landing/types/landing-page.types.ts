@@ -1,12 +1,6 @@
-export interface Feature {
-    icon: string;
-    iconType: 'svg';
-    title: string;
-    description: string;
-    gradient: string;
-}
+import {LucideIconData} from 'lucide-angular';
 
-export interface Testimonial {
+export type Testimonial = {
     name: string;
     role: string;
     company: string;
@@ -15,7 +9,13 @@ export interface Testimonial {
     rating: number;
 }
 
-export interface PricingPlan {
+export type Feature = {
+    icon: LucideIconData;
+    title: string;
+    description: string;
+}
+
+export type PricingPlan = {
     name: string;
     price: number;
     priceAnnual: number;
@@ -26,12 +26,7 @@ export interface PricingPlan {
     badge?: string;
 }
 
-export interface FAQItem {
+export type FAQItem = {
     question: string;
     answer: string;
-}
-
-export interface Stat {
-    value: string;
-    label: string;
 }
