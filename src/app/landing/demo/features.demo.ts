@@ -23,14 +23,14 @@ export class FeaturesDemo {
             color: 'primary'
         },
         {
-            title: 'Collaboration temps réel',
-            description: 'Travaillez ensemble instantanément',
+            title: 'Mises à jour instantanées',
+            description: 'Voyez vos changements en temps réel',
             icon: Users,
             color: 'secondary'
         },
         {
             title: 'Analytics avancés',
-            description: 'Suivez la performance de votre équipe',
+            description: 'Suivez l’évolution de vos projets',
             icon: ChartColumnDecreasing,
             color: 'accent'
         }

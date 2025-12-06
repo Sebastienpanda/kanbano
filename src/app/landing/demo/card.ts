@@ -1,4 +1,4 @@
-import {Component, input} from '@angular/core';
+import {ChangeDetectionStrategy, Component, input} from '@angular/core';
 import {Card} from './demo';
 import {EllipsisVertical, LucideAngularModule} from 'lucide-angular';
 
@@ -7,7 +7,8 @@ import {EllipsisVertical, LucideAngularModule} from 'lucide-angular';
     imports: [
         LucideAngularModule
     ],
-    templateUrl: "./card.html"
+    templateUrl: "./card.html",
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class CardKanban {
     readonly card = input.required<Card>()

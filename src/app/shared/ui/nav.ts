@@ -1,4 +1,4 @@
-import {Component, signal} from '@angular/core';
+import {ChangeDetectionStrategy, Component, signal} from '@angular/core';
 import {RouterLink} from '@angular/router';
 
 type NavItem = {
@@ -11,25 +11,26 @@ type NavItem = {
     imports: [
         RouterLink
     ],
-    templateUrl: "./nav.html"
+    templateUrl: "./nav.html",
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class Nav {
     protected readonly navItems = signal<NavItem[]>([
         {
-            url: "#features",
+            url: "features",
             title: "Fonctionnalités"
         },
         {
-            url: "#demo",
+            url: "demo",
             title: "Démo"
         },
-        {
-            url: "#pricing",
-            title: "Tarifs"
-        },
-        {
-            url: "#faq",
-            title: "FAQ"
-        },
+        // {
+        //     url: "pricing",
+        //     title: "Tarifs"
+        // },
+        // {
+        //     url: "faq",
+        //     title: "FAQ"
+        // },
     ])
 }

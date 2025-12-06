@@ -13,27 +13,27 @@ export class Features {
         {
             icon: Rocket,
             title: 'Démarrage Ultra-Rapide',
-            description: 'Créez votre premier board en moins de 30 secondes. Interface intuitive, zéro courbe d\'apprentissage.',
+            description: 'Créez votre premier board en moins de 30 secondes. Interface intuitive, aucune courbe d’apprentissage',
         },
         {
             icon: Zap,
             title: 'Performance Éclair',
-            description: 'Synchronisation temps réel, même avec 10,000+ tâches. Infrastructure ultra-optimisée.',
+            description: 'Synchronisation en temps réel, même avec des milliers de tâches. Infrastructure ultra-optimisée',
         },
         {
             icon: Palette,
             title: 'Personnalisation Infinie',
-            description: 'Thèmes, templates, workflows custom. Votre Kanban s\'adapte à votre méthode, pas l\'inverse.',
+            description: 'Templates, workflows : façonnez votre Kanban selon votre méthode',
         },
         {
             icon: Shield,
-            title: 'Sécurité Enterprise',
-            description: 'Chiffrement E2E, SSO, audit logs, conformité GDPR. Vos données sont sacrées.',
+            title: 'Sécurité Entreprise',
+            description: 'Chiffrement complet, permissions avancées, conformité RGPD. Vos données restent protégées, toujours',
         },
         {
             icon: ChartNoAxesColumn,
             title: 'Analytics Avancés',
-            description: 'Dashboards interactifs, prédictions de délais, insights actionnables. Pilotez avec data.',
+            description: 'Tableaux de bord, tendances, prédictions. Prenez de meilleures décisions, plus rapidement',
         },
     ]);
 }

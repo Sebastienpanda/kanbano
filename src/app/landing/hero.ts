@@ -1,22 +1,28 @@
-import { ChangeDetectionStrategy, Component, HostListener, OnDestroy, OnInit, signal } from '@angular/core';
+import {ChangeDetectionStrategy, Component, OnDestroy, OnInit, signal} from '@angular/core';
+import {RouterLink} from '@angular/router';
 
 @Component({
     selector: 'app-hero',
-    imports: [],
+    imports: [
+        RouterLink
+    ],
     templateUrl: './hero.html',
     changeDetection: ChangeDetectionStrategy.OnPush,
+    host: {
+        '(window:scroll)': 'onScroll()'
+    }
 })
 export class Hero implements OnInit, OnDestroy {
     displayedText = signal('');
     scrollY = signal(0);
     statsAnimated = signal(false);
     stats = [
-        { label: 'Utilisateurs actifs', target: 50000, suffix: 'K+', current: signal(0) },
-        { label: 'Tâches accomplies', target: 2000000, suffix: 'M+', current: signal(0) },
-        { label: 'Satisfaction Utilisateurs', target: 100, suffix: '%', current: signal(0) },
+        {label: 'Utilisateurs actifs', target: 50000, suffix: 'K+', current: signal(0)},
+        {label: 'Tâches accomplies', target: 2000000, suffix: 'M+', current: signal(0)},
+        {label: 'Satisfaction Utilisateurs', target: 100, suffix: '%', current: signal(0)},
     ];
 
-    private fullText = 'Transformez votre productivité avec FlowBoard';
+    private fullText = 'Transformez votre productivité avec Kanbano';
     private typeIndex = 0;
     private typewriterFrame?: number;
 
@@ -32,7 +38,6 @@ export class Hero implements OnInit, OnDestroy {
         this.statsObserver?.disconnect();
     }
 
-    @HostListener('window:scroll')
     onScroll() {
         this.scrollY.set(window.scrollY);
     }
@@ -60,7 +65,7 @@ export class Hero implements OnInit, OnDestroy {
     }
 
     scrollToSection(id: string) {
-        document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
+        document.getElementById(id)?.scrollIntoView({behavior: 'smooth'});
     }
 
     private runTypewriter() {

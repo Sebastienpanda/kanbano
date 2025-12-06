@@ -1,4 +1,4 @@
-import {Component, input, signal} from '@angular/core';
+import {ChangeDetectionStrategy, Component, input, signal} from '@angular/core';
 import {Card, Column} from './demo';
 import {CardKanban} from './card';
 
@@ -7,7 +7,8 @@ import {CardKanban} from './card';
     imports: [
         CardKanban
     ],
-    templateUrl: "./columns.html"
+    templateUrl: "./columns.html",
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class Columns {
     readonly columns = input.required<Column[]>()
